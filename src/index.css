@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* Шрифты лежат локально (src/assets/fonts) и инлайнятся в сборку:
+ * приложение не ходит в Google Fonts, работает офлайн и не выдаёт
+ * запросы третьим лицам. */
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("./assets/fonts/manrope-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("./assets/fonts/manrope-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/instrument-serif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --color-canvas: #f3f0e8;
+  --color-cream: #fbf9f3;
+  --color-ink: #16261e;
+  --color-moss: #24513c;
+  --color-moss-light: #47765e;
+  --color-lime: #dcef9a;
+  --color-lime-deep: #c8e276;
+  --color-terracotta: #c97351;
+  --color-mustard: #c9a23c;
+  --color-sage: #739375;
+  --color-line: #e1dccf;
+  --color-muted: #727a72;
+  --color-soft: #f7f4ec;
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Times New Roman", Georgia, serif;
+
+  --shadow-card: 0 24px 60px -32px rgb(22 38 30 / 0.28);
+  --shadow-soft: 0 10px 30px -18px rgb(22 38 30 / 0.25);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-screen {
+  animation: screen-in 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-screen {
+    animation: none;
+  }
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* Remove native number input controls for a cleaner field */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Custom range */
+.range-input {
+  --fill: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 26px;
+  background: transparent;
+  cursor: pointer;
+}
+.range-input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-moss) 0%,
+    var(--color-moss) var(--fill),
+    #e3ded1 var(--fill),
+    #e3ded1 100%
+  );
+}
+.range-input::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e3ded1;
+}
+.range-input::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-moss);
+}
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7px;
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: var(--color-cream);
+  border: 2px solid var(--color-moss);
+  box-shadow: 0 3px 10px rgb(22 38 30 / 0.22);
+  transition: transform 0.15s ease;
+}
+.range-input::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: var(--color-cream);
+  border: 2px solid var(--color-moss);
+  box-shadow: 0 3px 10px rgb(22 38 30 / 0.22);
+}
+.range-input:hover::-webkit-slider-thumb {
+  transform: scale(1.08);
+}
+.range-input:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid color-mix(in srgb, var(--color-lime) 80%, transparent);
+  outline-offset: 2px;
+}
+
+.range-input--light::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    var(--color-moss) 0%,
+    var(--color-moss) var(--fill),
+    #e8e3d6 var(--fill),
+    #e8e3d6 100%
+  );
+}
+
+/* Fine dotted texture used on the dark summary card */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(220 239 154 / 0.16) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  border-radius: inherit;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-pop {
+  animation: pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-rise,
+  .animate-pop {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide scrollbar for compact horizontal goal tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

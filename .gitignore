@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+Thumbs.db
+*.log
+_smoke*.png
+_smoke*.html

@@ -1,0 +1,4 @@
+# Настройки graphify для этого проекта.
+# Ключи: query_budget (токены), query_depth (1-6).
+query_budget=1500
+query_depth=2

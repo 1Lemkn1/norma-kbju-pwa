@@ -1,5 +1,7 @@
 node_modules/
 dist/
+# граф кода graphify — генерируется локально
+graphify-out/
 *.local
 .DS_Store
 Thumbs.db
